@@ -24,6 +24,13 @@ $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(true);
 
+$routes->get('index', 'Index::index');
+$routes->get('register', 'Register::index');
+
+$routes->post('index', "Index::index");
+$routes->post('register', "Register::do_register");
+
+
 /*
  * --------------------------------------------------------------------
  * Route Definitions

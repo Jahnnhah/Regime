@@ -1,0 +1,71 @@
+/* Styles pour le formulaire */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  /* Styles pour les labels */
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  /* Styles pour les champs de saisie */
+  input[type="text"],
+  select {
+    width: 90%;
+    padding: 5px;
+    border: 1px solid blue;
+    border-radius: 3px;
+    margin-bottom: 10px;
+  }
+  
+
+  /* Style spécifique pour la liste déroulante */
+  select {
+    appearance: none;
+    background-position: right center;
+  }
+  
+
+  label, input, textarea {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+
+  form { 
+    width: 90%;
+    position: relative;
+    /*display: flex;*/
+    justify-content: center;
+    align-items: center;
+    border: 1px solid blue;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+    border-radius: 16px; /* Coins arrondis */
+    margin:auto;
+    padding:auto;
+    margin-top: 10%;
+    
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#info{
+  display: flex; 
+  justify-content: center;
+}
+
+
+  /* Styles pour le bouton submit */
+  input[type="submit"] {
+    width: 90%;
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
