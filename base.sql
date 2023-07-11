@@ -58,12 +58,13 @@ CREATE TABLE codes_recharge (
   est_utilise TINYINT(1) DEFAULT 0
 );
 
+/*novaina ito*/
 CREATE TABLE regimes (
   id INT(11) AUTO_INCREMENT PRIMARY KEY,
   type ENUM('Augmenter', 'Diminuer', 'Suggérer') NOT NULL,
   nom VARCHAR(50) NOT NULL,
   description TEXT
-);
+)ENGINE=InnoDB;
 
 CREATE TABLE activites (
   id INT(11) AUTO_INCREMENT PRIMARY KEY,
@@ -100,9 +101,22 @@ INSERT INTO regimes (type, nom, description) VALUES
   ('Suggérer', 'Tai-chi', 'Art martial chinois caractérisé par des mouvements lents et fluides pour améliorer la santé et la relaxation.'),
   ('Suggérer', 'Zumba', 'Programme entraînement basé sur la danse et la musique latino-américaine pour une activité dynamique et amusante.');
 
-
+/*novaina ito*/
 CREATE TABLE wallet(
   id_olona int(11),
   vola_ao DECIMAL(10, 2),
   FOREIGN KEY (id_olona) REFERENCES users(id)
-);
+)ENGINE=InnoDB;
+
+/*novaina ito*/
+CREATE TABLE composition(
+  id_regime INT(11),
+  %_viande FLOAT,
+  %_poisson FLOAT,
+  %_volaille FLOAT,
+  FOREIGN KEY (id_regime) REFERENCES regimes(id)
+)ENGINE=InnoDB;
+
+
+
+
