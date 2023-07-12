@@ -1,4 +1,4 @@
-<form id="regimeForm" action="<?php echo base_url("backoffice/BoActiviteController/doCreate")?>" method="post">
+<form id="activiteForm" action="<?php echo base_url("backoffice/BoActiviteController/doCreate")?>" method="post">
      <?php if (isset($_GET['error'])) { ?>
           <p class="error"><?php echo $_GET['error']; ?></p>
      <?php } ?>
@@ -8,7 +8,7 @@
      <?php } ?>
 
      <div class="form-group">
-          <label>Type de l'Activite</label><br>
+          <label>Type du regime</label><br>
           <select class="form-control" name="type" id="type" required>
                <option value="Diminuer">Diminuer</option>
                <option value="Augmenter">Augmenter</option>
@@ -16,23 +16,23 @@
      </div>
 
      <div class="form-group">
-          <label>Nom de l' Activite</label>
+          <label>Nom du Regime</label>
           <input type="text"
                id="name"
                class="form-control" 
                name="name" 
-               placeholder="Nom de l'Activite" required>
+               placeholder="Nom du Regime" required>
      </div>
     
 
      <div class="form-group">
-     <label>Description de l' Activite</label>
+     <label>Description du regime</label>
      
      <input type="text" 
           id="description"
           class="form-control"
           name="description" 
-          placeholder="Description de l'Activite">
+          placeholder="Description du regime">
      </div>
      <input type="hidden" name="id" id="id"> 
      

@@ -2,21 +2,22 @@
 
 namespace App\Controllers;
 
-use App\Models\UserModel;
+use App\Models\User;
+use App\Models\UserInfo;
+use App\Models\Objectif;
 use CodeIgniter\Controller;
-use CodeIgniter\HTTP\RequestInterface;
 
 class UserController extends Controller
 {
-    private $userModel;
     public function __construct()
     {
-        $this->userModel=new UserModel();
+        $this->session = \Config\Services::session();
     }
 
     public function find()
     {
-        $users = $this->userModel->findAll();
+        $userModel=new User();
+        $users = $userModel->findAll();
         return view('users', ['users' => $users]);
     }
 
@@ -26,13 +27,44 @@ class UserController extends Controller
     }
 
     public function doRegister(){
-        // $this->input->post('nom_user');
-        $name=$this->request->getPOST('name');
-        $pwd=$this->request->getPOST('pwd');
-        $this->userModel->login($name,$pwd);
         
+        $userModel=new User();
+        $name=$this->request->getPOST('name');
+        $uname=$this->request->getPOST('uname');
+        $password=$this->request->getPOST('password');
+        $data=[
+            'user_name'=>$uname,
+            'password'=>password_hash($password,PASSWORD_BCRYPT),
+            'name'=>$name
+        ];
+        
+        $userModel->insert($data);
+        $insertedId = $userModel->insertID();
+        $this->session->set('ui', $insertedId);
 
-        echo "doRegister";
+        return redirect()->to(base_url("UserController/info"));
+
+    }
+
+    public function saveInfo(){
+        
+        $model=new UserInfo();
+        $poids=$this->request->getPOST('poids');
+        $taille=$this->request->getPOST('taille');
+        $genre=$this->request->getPOST('genre');
+        $age=$this->request->getPOST('age');
+        
+        $data=[
+            'id_user'=>$this->session->get('ui'),
+            'poids'=>$poids,
+            'taille'=>$taille,
+            'genre'=>$genre,
+            'age'=>$age
+        ];
+        
+        $model->insert($data);
+
+        return redirect()->to(base_url("UserController/loadChoix"));
 
     }
 
@@ -40,10 +72,49 @@ class UserController extends Controller
         return view('index');
     }
     public function doLogin(){
-        echo "Form submited";
+        $userModel=new User();
+        $uname=$this->request->getPOST('uname');
+        $password=$this->request->getPOST('password');
+
+        $result=$userModel->where('user_name',$uname)->first();
+        if($result){
+            //compare hash password
+            if(password_verify($password,$result["password"])){
+                $this->session->set('ui',$result["id"]);
+                
+                if($result["user_name"]==="admin"){
+                    // si user admin
+                    $this->session->set('urole','admin');
+                    return redirect()->to(base_url("backoffice/BoUserController"));
+                }else{
+                    // si user simple
+                    $this->session->set('urole','user');
+                    return redirect()->to(base_url("UserController/loadProposition"));
+                }
+                
+            }else{
+                return redirect()->to(base_url("UserController"))->with('error', 'wrong password');
+            }
+        }else{
+            return redirect()->to(base_url("UserController"))->with('error', 'password does not exist');
+        }
     }
     public function loadChoix(){
         return view ('choix');
+    }
+
+    public function doChoix(){
+        $model=new Objectif();
+        $choix=$this->request->getPOST('choix');
+        $data=[
+            'utilisateur_id'=>$this->session->get('ui'),
+            'objectif'=>$choix
+        ];
+
+        var_dump($data);
+        
+        $model->insert($data);
+        return redirect()->to(base_url("UserController/loadProposition"));
     }
     public function loadProposition(){
         return view ('proposition');
@@ -55,5 +126,12 @@ class UserController extends Controller
     public function info()
     {
         return view('information');
+    }
+
+    public function logout(){
+        $this->session = \Config\Services::session();
+        $this->session->remove('ui');
+        $this->session->remove('urole');
+        return redirect()->to(base_url("UserController"));
     }
 }

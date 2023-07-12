@@ -4,32 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url("assets/style2.css") ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url("assets/style.css") ?>">
 </head>
 <body>
-<form action="<?php echo base_url("UserController/loadProposition")?>" method="post">
-        <h2>Information à remplir :</h2>
+<form action="<?php echo base_url("UserController/doChoix")?>" method="post">
+        <label for="info">Information à remplir :</label>
 
-        <label class="choice">
-            <input type="checkbox" id="prendre" name="prendre">
-            Prendre du poids
-        </label><br>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+            <label for="prendre">Prendre du poids</label>
+            <input type="radio" id="prendre" name="choix" value="Augmenter le poids">
+        </div>
 
-        <label class="choice">
-            <input type="checkbox" id="perdre" name="perdre">
-            Perdre du poids
-        </label><br>
-
-        <label class="choice">
-            <input type="checkbox" id="suggere" name="suggere">
-            Suggérer
-        </label>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+            <label for="perdre">Perdre du poids</label>
+            <input type="radio" id="perdre" name="choix" value="Diminuer le poids">
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+            <label for="suggérer">Suggérer</label>
+            <input type="radio" id="suggérer" name="choix" value="Suggestion">
+        </div>
 
 
     </br>
     </br>
         <button type="submit">Envoyer</button>
-        <a href="<?php echo base_url("UserController/info")?>" class="ca">Retour</a>
+        <a href="<?php echo base_url("User/index")?>"class="ca">Already have an account?</a>
       </form>
       
 </body>

@@ -5,7 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url("assets/style.css") ?>">
 </head>
 <body>
-     <form action="<?php echo base_url("");?>" method="post">
+     <form action="<?php echo base_url("UserController/doLogin");?>" method="post">
      	<h2>LOGIN</h2>
      	<?php if (isset($_GET['error'])) { ?>
      		<p class="error"><?php echo $_GET['error']; ?></p>

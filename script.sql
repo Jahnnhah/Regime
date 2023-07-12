@@ -3,7 +3,7 @@ CREATE DATABASE regime;
 USE regime;
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL PRIMARY KEY,
+  `id` int(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,
   `user_name` varchar(255),
   `password` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL

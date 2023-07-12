@@ -4,12 +4,12 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Regime extends Model
+class Activite extends Model
 {
     // protected $table = 'APP_USER';
 
 
-    protected $table = 'regimes';
+    protected $table = 'activites';
     protected $primaryKey = 'id';
     protected $allowedFields = ['type','nom','description'];
     // protected $allowedFields = ['username', 'password'];

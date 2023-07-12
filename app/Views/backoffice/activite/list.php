@@ -8,7 +8,7 @@
     <?= view('backoffice/commons/header') ?>
     <div class="container-fluid">
         <div class="row pt-4 pl-5">
-            <button id="create-button" class="btn btn-success" data-toggle="modal" data-target="#regimeModal">Creer un nouveau regime</button>
+            <button id="create-button" class="btn btn-success" data-toggle="modal" data-target="#activiteModal">Creer une nouvelle activite</button>
         </div>
         <div class="row px-5 pt-4">
             <table class="table table-bordered">
@@ -22,15 +22,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($regimes as $regime): ?>
+                    <?php foreach ($activites as $activite): ?>
                     <tr>
-                    <td class="id"><?php echo $regime['id']; ?></td>
-                        <td class="type"><?php echo $regime['type']; ?></td>
-                        <td class="nom"><?php echo $regime['nom']; ?></td>
-                        <td class="description"><?php echo $regime['description']; ?></td>
+                    <td class="id"><?php echo $activite['id']; ?></td>
+                        <td class="type"><?php echo $activite['type']; ?></td>
+                        <td class="nom"><?php echo $activite['nom']; ?></td>
+                        <td class="description"><?php echo $activite['description']; ?></td>
                         <td class="d-flex justify-content-center align-item-center"> 
-                            <a class="btn btn-success mx-2 text-light edit-link" href="#regimeModal" data-toggle="modal" >EDIT</a>
-                            <a class="btn btn-danger text-light" href="<?php echo base_url("backoffice/BoRegimeController/delete?id=".$regime['id']) ?>">DELETE</a>
+                            <a class="btn btn-success mx-2 text-light edit-link" href="#activiteModal" data-toggle="modal" >EDIT</a>
+                            <a class="btn btn-danger text-light" href="<?php echo base_url("backoffice/BoActiviteController/delete?id=".$activite['id']) ?>">DELETE</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -38,18 +38,18 @@
             </table>
         </div>
 
-        <!-- Modal REGIME MODAL -->
-        <div class="modal fade" id="regimeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- Modal Activite MODAL -->
+        <div class="modal fade" id="activiteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">AJOUT/MODIFIER UN REGIME</h5>
+                <h5 class="modal-title" id="exampleModalLabel">AJOUT/MODIFIER UNE ACTIVITE</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-            <?= view('backoffice/regime/create-form') ?>
+            <?= view('backoffice/activite/create-form') ?>
             </div>
             </div>
         </div>
@@ -70,14 +70,15 @@
             var typeVal=row.find(".type").text()
             var nomVal=row.find(".nom").text()
             var descriptionVal=row.find(".description").text()
-            $('#regimeForm').find('input#name').val(nomVal)
-            $('#regimeForm').find('input#description').val(descriptionVal)
-            $('#regimeForm').find('select#type').val(typeVal)
-            $('#regimeForm').find('input#id').val(idVal)
-            $("#regimeModal").modal("show")
+            console.log(idVal,typeVal,nomVal);
+            $('#activiteForm').find('input#name').val(nomVal)
+            $('#activiteForm').find('input#description').val(descriptionVal)
+            $('#activiteForm').find('select#type').val(typeVal)
+            $('#activiteForm').find('input#id').val(idVal)
+            $("#activiteModal").modal("show")
         })
         $("#create-button").click(function(event){
-            $('#regimeForm')[0].reset();
+            $('#activiteForm')[0].reset();
         })
     })
 </script>

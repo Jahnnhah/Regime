@@ -4,8 +4,8 @@ namespace App\Controllers\backoffice;
 
 
 use CodeIgniter\Controller;
-use App\Models\Regime;
-class BoRegimeController extends Controller
+use App\Models\Activite;
+class BoActiviteController extends Controller
 {
     public function doCreate(){
         $id=$this->request->getPost("id");
@@ -18,24 +18,24 @@ class BoRegimeController extends Controller
             'nom'=> $name,
             'description' => $description,
         ];
-        $model=new Regime();
+        $model=new Activite();
         $model->upsert($data);
-        return redirect()->to(base_url("backoffice/BoRegimeController/list"));
+        return redirect()->to(base_url("backoffice/BoActiviteController/list"));
     }
 
 
     public function list(){
-        $model=new Regime();
-        $regimes=$model->getAll();
-        return view('backoffice/regime/list',[
-            'regimes'=>$regimes
+        $model=new Activite();
+        $activites=$model->getAll();
+        return view('backoffice/activite/list',[
+            'activites'=>$activites
         ]);
     }
 
     public function delete(){
         $id=$this->request->getVar("id");
-        $model=new Regime();
+        $model=new Activite();
         $model->deleteOne($id);
-        return redirect()->to(base_url("backoffice/BoRegimeController/list"));
+        return redirect()->to(base_url("backoffice/BoActiviteController/list"));
     }
 }
